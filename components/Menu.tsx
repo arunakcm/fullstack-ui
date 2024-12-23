@@ -18,7 +18,7 @@ const Menu: React.FC = () => {
   useEffect(() => {
     dispatch(getAllMenuList())
     dispatch(getAllOptionList())
-  },[dispatch])
+  }, [dispatch])
   const onSelect: TreeProps["onSelect"] = (selectedKeys: any) => {
     // console.log("selected", selectedKeys, info);
     setSelectedNode(selectedKeys.length > 0 ? selectedKeys[0] : null);
@@ -34,9 +34,9 @@ const Menu: React.FC = () => {
   const Dropdown = ({ data }: { data: any }) => {
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
       dispatch(getFilteredMenuList(event.target.value))
-      const selectedId = event.target.value; 
+      const selectedId = event.target.value;
       console.log(`Selected ID: ${selectedId}`);
-      setSelectedValue(selectedId); 
+      setSelectedValue(selectedId);
     };
     const renderOptions = (nodes: any, depth = 0) => {
       return nodes.map((node: any) => (
@@ -72,11 +72,28 @@ const Menu: React.FC = () => {
     setDepth(nodeId.depth)
     setParentData(nodeId.name)
     console.log("Add button clicked for node:", nodeId);
-    
+
   };
 
-  const handleSubmit = (e:any) => {
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      // Client-side code
+      const element = document.getElementById("some-element");
+      console.log(element);
+    }
+  }, []);
+
+  const handleSubmit = (e: any) => {
     e.preventDefault();
+
+    // Validation: Check if all fields are filled
+    if (!parentId || !depth || !parentData || !name) {
+      alert("Please fill in all fields before submitting.");
+      return;
+    }
+
+    // Proceed with form submission logic
+    console.log({ parentId, depth, parentData, name });
     const data = {
       name: name,
       depth: depth,
@@ -89,7 +106,7 @@ const Menu: React.FC = () => {
     setParentData('')
     dispatch(getAllMenuList())
   }
-  
+
   const mapToMenuData = (menuAllData: any) => {
     return menuAllData.map((data: { name: any; id: any; children: any; depth: number }) => ({
       title: (
@@ -97,7 +114,7 @@ const Menu: React.FC = () => {
           {data.name}
           {selectedNode === data.id && (
             <Button onClick={() => handleAddButtonClick(data)} size="small" className="w-fit bg-blue-500 text-white rounded-full">
-              <IoMdAdd/>
+              <IoMdAdd />
             </Button>
           )}
         </div>
@@ -105,12 +122,12 @@ const Menu: React.FC = () => {
       key: data.id,
       depthId: data.depth,
       children: data.children ? mapToMenuData(data.children) : [],
- 
+
     }));
   };
   const menuListData = mapToMenuData(menuList);
   const OptionData = OptionValues(optionList);
- 
+
   return (
     <div className="w-full lg:w-[70%] lg:p-4 lg:px-16 h-auto mt-4 lg:mt-0">
       <span className="w-full flex items-start justify-start gap-2">
@@ -127,67 +144,65 @@ const Menu: React.FC = () => {
         <label className="w-fit text-base tracking-wide text-gray-500">
           Menu
         </label>
-       
+
         {OptionData}
         {/* </select> */}
       </div>
       <div className="w-full flex items-center justify-start gap-4 mt-5">
         <button
           onClick={() => setActiveTabTree("expand-all")}
-          className={`w-fit border rounded-full px-7 py-2 text-sm ${
-            activeTabTree === "expand-all"
+          className={`w-fit border rounded-full px-7 py-2 text-sm ${activeTabTree === "expand-all"
               ? "bg-black text-white"
               : "hover:bg-black hover:text-white"
-          }`}
+            }`}
         >
           Expand All
         </button>
         <button
           onClick={() => setActiveTabTree("collapse-all")}
-          className={`w-fit border rounded-full px-7 py-2 text-sm ${
-            activeTabTree === "collapse-all"
+          className={`w-fit border rounded-full px-7 py-2 text-sm ${activeTabTree === "collapse-all"
               ? "bg-black text-white"
               : "hover:bg-black hover:text-white"
-          }`}
+            }`}
         >
           Collapse All
         </button>
       </div>
       <div className="w-full flex justify-between flex-wrap lg:flex-nowrap ">
-      <div className="w-full mt-6">
-        <Tree
-          showLine
-          switcherIcon={<DownOutlined />}
-          defaultExpandedKeys={menuListData.key}
-          onSelect={onSelect}
-          treeData={menuListData}
-        />
-      </div>
-      <div className="w-full mt-6 lg:ml-6 ">
-        <div className="w-auto h-auto   rounded">
-          <form>
-            <div className="w-full lg:p-4">
-              <div className="w-full lg:w-[350px] flex flex-col mb-3">
-                <label className="w-full text-base text-gray-500 tracking-wide">Menu Id</label>
-                <input type="text" value={parentId} onChange={(e) => setParentId(e.target.value)} className="w-full px-3 py-1 border cursor-pointer rounded-lg"/>
-              </div>
-              <div className="w-ull flex flex-col mb-3">
-                <label className="w-full text-base text-gray-500 tracking-wide">Depth</label>
-                <input type="text" value={depth} onChange={(e) => setDepth(e.target.value)} className="w-fit px-3 py-1 border cursor-pointer rounded-lg"/>
-              </div>
-              <div className="w-ull flex flex-col mb-3">
-                <label className="w-full text-base text-gray-500 tracking-wide">Parent Data</label>
-                <input type="text" value={parentData} onChange={(e) => setParentData(e.target.value)} className="w-fit px-3 py-1 border cursor-pointer rounded-lg"/>
-              </div>
-              <div className="w-ull flex flex-col ">
-                <label className="w-full text-base text-gray-500 tracking-wide">Name</label>
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-fit px-3 py-1 border cursor-pointer rounded-lg"/>
-              </div>
-              <Button onClick={handleSubmit} className="w-[220px] mt-4 bg-blue-500 cursor-pointer text-white text-lg tracking-wide rounded-full">Save</Button>
-            </div>
-          </form>
+        <div className="w-full mt-6">
+          <Tree
+            showLine
+            switcherIcon={<DownOutlined />}
+            defaultExpandedKeys={menuListData.key}
+            onSelect={onSelect}
+            treeData={menuListData}
+          />
         </div>
-      </div>
+        <div className="w-full mt-6 lg:ml-6 ">
+          <div className="w-auto h-auto   rounded">
+            <form>
+              <div className="w-full lg:p-4">
+                <div className="w-full lg:w-[350px] flex flex-col mb-3">
+                  <label className="w-full text-base text-gray-500 tracking-wide">Menu Id</label>
+                  <input type="text" value={parentId} onChange={(e) => setParentId(e.target.value)} className="w-full px-3 py-1 border cursor-pointer rounded-lg" />
+                </div>
+                <div className="w-ull flex flex-col mb-3">
+                  <label className="w-full text-base text-gray-500 tracking-wide">Depth</label>
+                  <input type="text" value={depth} onChange={(e) => setDepth(e.target.value)} className="w-fit px-3 py-1 border cursor-pointer rounded-lg" />
+                </div>
+                <div className="w-ull flex flex-col mb-3">
+                  <label className="w-full text-base text-gray-500 tracking-wide">Parent Data</label>
+                  <input type="text" value={parentData} onChange={(e) => setParentData(e.target.value)} className="w-fit px-3 py-1 border cursor-pointer rounded-lg" />
+                </div>
+                <div className="w-ull flex flex-col ">
+                  <label className="w-full text-base text-gray-500 tracking-wide">Name</label>
+                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-fit px-3 py-1 border cursor-pointer rounded-lg" />
+                </div>
+                <Button onClick={handleSubmit} className="w-[220px] mt-4 bg-blue-500 cursor-pointer text-white text-lg tracking-wide rounded-full">Save</Button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );

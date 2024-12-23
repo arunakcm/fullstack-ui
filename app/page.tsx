@@ -6,13 +6,7 @@ import store from "../redux/store"
 import { useEffect } from "react";
 
 export default function Home() {
-  useEffect(() => {
-    if (typeof document !== "undefined") {
-      // Client-side code
-      const element = document.getElementById("some-element");
-      console.log(element);
-    }
-  }, []);
+
   return (
     <div className="">
       <Provider store={store}>
