@@ -5,15 +5,11 @@ import { MdMenuOpen } from "react-icons/md";
 import Image from "next/image"; // Assuming you're using Next.js for Image handling
 import logo from "../public/Images/image.png"; // Update with the correct logo path
 import Menu from "./Menu";
-import DataModule from "./DataModule";
 
 const Sidebar = () => {
   const [activeTab, setActiveTab] = useState("menu"); // Default active tab
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // State to toggle sidebar
 
-  const handleToggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen); // Toggle sidebar visibility
-  };
+
   // Function to dynamically render content based on the activeTab state
   const renderContent = () => {
     if (activeTab === "systems") {

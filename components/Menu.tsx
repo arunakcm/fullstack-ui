@@ -18,8 +18,8 @@ const Menu: React.FC = () => {
   useEffect(() => {
     dispatch(getAllMenuList())
     dispatch(getAllOptionList())
-  },[])
-  const onSelect: TreeProps["onSelect"] = (selectedKeys: any, info) => {
+  },[dispatch])
+  const onSelect: TreeProps["onSelect"] = (selectedKeys: any) => {
     // console.log("selected", selectedKeys, info);
     setSelectedNode(selectedKeys.length > 0 ? selectedKeys[0] : null);
   };
@@ -89,7 +89,6 @@ const Menu: React.FC = () => {
     setParentData('')
   }
   
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const mapToMenuData = (menuAllData: any) => {
     return menuAllData.map((data: { name: any; id: any; children: any; depth: number }) => ({
       title: (
