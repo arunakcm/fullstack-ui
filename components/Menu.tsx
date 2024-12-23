@@ -10,9 +10,6 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { getAllMenuList, getAllOptionList, getFilteredMenuList, saveMenu } from "@/redux/actions/menuAction";
 import { IoMdAdd } from "react-icons/io";
 
-
-
-
 const Menu: React.FC = () => {
   const dispatch: AppDispatch = useDispatch()
   const menuList = useSelector((state: RootState) => state.menuDataList.menuList)
@@ -23,7 +20,6 @@ const Menu: React.FC = () => {
     dispatch(getAllOptionList())
   }, [dispatch])
   const onSelect: TreeProps["onSelect"] = (selectedKeys: any) => {
-    // console.log("selected", selectedKeys, info);
     setSelectedNode(selectedKeys.length > 0 ? selectedKeys[0] : null);
   };
   const [activeTabTree, setActiveTabTree] = useState("");
@@ -87,13 +83,6 @@ const Menu: React.FC = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-
-    // Validation: Check if all fields are filled
-    if (!parentId || !depth || !parentData || !name) {
-      alert("Please fill in all fields before submitting.");
-      return;
-    }
-
     // Proceed with form submission logic
     console.log({ parentId, depth, parentData, name });
     const data = {

@@ -2,15 +2,14 @@ import { useState } from "react";
 import { VscFileSymlinkDirectory } from "react-icons/vsc";
 import { AiOutlineQrcode, AiFillAppstore, AiOutlineAppstore } from "react-icons/ai";
 import { MdMenuOpen } from "react-icons/md";
-import Image from "next/image"; // Assuming you're using Next.js for Image handling
-import logo from "../public/Images/image.png"; // Update with the correct logo path
+import Image from "next/image";
+import logo from "../public/Images/image.png";
 import Menu from "./Menu";
 
 const Sidebar = () => {
-  const [activeTab, setActiveTab] = useState("menu"); // Default active tab
+  const [activeTab, setActiveTab] = useState("menu"); 
 
 
-  // Function to dynamically render content based on the activeTab state
   const renderContent = () => {
     if (activeTab === "systems") {
       return <div></div>;

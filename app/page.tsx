@@ -1,4 +1,3 @@
-"use client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminPanel from "../components/AdminPannel";
 import { Provider } from "react-redux";
