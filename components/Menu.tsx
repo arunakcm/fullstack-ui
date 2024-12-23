@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 import React, { useEffect, useState } from "react";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { VscFileSymlinkDirectory } from "react-icons/vsc";
@@ -79,10 +79,9 @@ const Menu: React.FC = () => {
   };
 
   useEffect(() => {
+    // Client-side logic
     if (typeof document !== "undefined") {
-      // Client-side code
-      const element = document.getElementById("some-element");
-      console.log(element);
+      console.log("This is client-side content.");
     }
   }, []);
 
