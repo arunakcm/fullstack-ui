@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminPanel from "../components/AdminPannel";
 import { Provider } from "react-redux";
 import store from "../redux/store"
-import { useEffect } from "react";
 
 export default function Home() {
 
