@@ -34,9 +34,9 @@ const Menu: React.FC = () => {
   const Dropdown = ({ data }: { data: any }) => {
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
       dispatch(getFilteredMenuList(event.target.value))
-      const selectedId = event.target.value; // Get the selected option's value
-      console.log(`Selected ID: ${selectedId}`); // Log the selected ID
-      setSelectedValue(selectedId); // Update state with the selected value
+      const selectedId = event.target.value; 
+      console.log(`Selected ID: ${selectedId}`);
+      setSelectedValue(selectedId); 
     };
     const renderOptions = (nodes: any, depth = 0) => {
       return nodes.map((node: any) => (
@@ -72,10 +72,11 @@ const Menu: React.FC = () => {
     setDepth(nodeId.depth)
     setParentData(nodeId.name)
     console.log("Add button clicked for node:", nodeId);
-    // You can handle the "Add" functionality here, e.g., opening a form or adding a new item
+    
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e:any) => {
+    e.preventDefault();
     const data = {
       name: name,
       depth: depth,
@@ -87,7 +88,7 @@ const Menu: React.FC = () => {
     setDepth('')
     setParentData('')
   }
-  // const [menuArry, setMenuArray] = useState([])
+  
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const mapToMenuData = (menuAllData: any) => {
     return menuAllData.map((data: { name: any; id: any; children: any; depth: number }) => ({
@@ -104,13 +105,12 @@ const Menu: React.FC = () => {
       key: data.id,
       depthId: data.depth,
       children: data.children ? mapToMenuData(data.children) : [],
-      //   setMenuArray({title, key})
+ 
     }));
   };
   const menuListData = mapToMenuData(menuList);
   const OptionData = OptionValues(optionList);
-  // console.log("menuDataArry : ", menuListData);
-
+ 
   return (
     <div className="w-full lg:w-[70%] lg:p-4 lg:px-16 h-auto mt-4 lg:mt-0">
       <span className="w-full flex items-start justify-start gap-2">
@@ -127,7 +127,7 @@ const Menu: React.FC = () => {
         <label className="w-fit text-base tracking-wide text-gray-500">
           Menu
         </label>
-        {/* <select id="cars" name="cars" className="w-[350px] p-2 border rounded"> */}
+       
         {OptionData}
         {/* </select> */}
       </div>

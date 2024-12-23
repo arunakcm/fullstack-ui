@@ -8,11 +8,11 @@ export default function Home() {
   return (
     <div className="">
       <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<AdminPanel/>} />
-        </Routes>
-      </BrowserRouter>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<AdminPanel />} />
+          </Routes>
+        </BrowserRouter>
       </Provider>
     </div>
   );
