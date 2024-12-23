@@ -87,6 +87,7 @@ const Menu: React.FC = () => {
     setName('')
     setDepth('')
     setParentData('')
+    dispatch(getAllMenuList())
   }
   
   const mapToMenuData = (menuAllData: any) => {
