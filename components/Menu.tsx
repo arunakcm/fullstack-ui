@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import { AiOutlineAppstore } from "react-icons/ai";
 import { VscFileSymlinkDirectory } from "react-icons/vsc";

@@ -1,3 +1,4 @@
+'use client';
 import { useState } from "react";
 import { VscFileSymlinkDirectory } from "react-icons/vsc";
 import { AiOutlineQrcode, AiFillAppstore, AiOutlineAppstore } from "react-icons/ai";
